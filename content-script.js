@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
 });
 
-const fillForm = async(data) => {
+const fillForm = (data) => {
     mammoth.convertToHtml({arrayBuffer: data})
     .then(function(result){
         var html = result.value; // The generated HTML
@@ -24,7 +24,8 @@ const fillForm = async(data) => {
     });
 }
 
-const fill = async(html) => {
+const fill = (html) => {
+    console.log(html);
     //get the target data from docx file
     const $ = load(html);
     const paragraphsText = [];
@@ -46,8 +47,10 @@ const fill = async(html) => {
             console.log(inputId[i], paragraphsText[i])
             let input = document.getElementById(inputId[i]);
             input.value = paragraphsText[i].split("：")[1];
+            if(i == inputId.length - 1) {
+                alert('Doves works successfully!')
+            }
         }
-        alert('auto fill successfully!')
     } else {
         alert('input length error!')
     }
