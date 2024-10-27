@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "doves",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "一个把本地docx文件信息自动填写到html表格的插件",
 	"author": "aaron-yu",
 	"icons":

@@ -28,13 +28,14 @@ const fill = (html) => {
     console.log(html);
     //get the target data from docx file
     const $ = load(html);
+
+    //paragraphsText fill
     const paragraphsText = [];
     $('li').each((index, element) => {
         paragraphsText.push($(element).text().trim());
     });
-    
-    //create the target html input elements array. note that the order should be consistent with paragraphsText.
-    const inputId = [
+
+    const inputId = [  //create the target html input elements array. note that the order should be consistent with paragraphsText.
         "text-1",
         "text-2",
         "text-3",
@@ -47,11 +48,36 @@ const fill = (html) => {
             console.log(inputId[i], paragraphsText[i])
             let input = document.getElementById(inputId[i]);
             input.value = paragraphsText[i].split("：")[1];
-            if(i == inputId.length - 1) {
-                alert('Doves works successfully!')
-            }
         }
     } else {
         alert('input length error!')
     }
+
+    //tableText fill
+    const tableText = [];
+    $('table p').each((index, element) => {
+        tableText.push($(element).text().trim());
+    });
+    
+    let tableHtmlContent = `
+        <tr>
+            <th>${tableText[0]}</th>
+            <th>${tableText[1]}</th>
+            <th>${tableText[2]}</th>
+            <th>${tableText[3]}</th>
+        </tr>    
+    `
+    for(var i =0; i < tableText.length/4-1; i++) {
+        tableHtmlContent += `
+        <tr>
+            <td>${i+1}</td>
+            <td><input type="text" id="t-${10*(i+1)+1}" value="${tableText[5+4*i]}"></td>
+            <td><input type="date" id="t-${10*(i+1)+2}" value="${tableText[6+4*i]}"></td>
+            <td><input type="text" id="t-${10*(i+1)+3}" value="${tableText[7+4*i]}"></td>
+        </tr>
+        `
+    }
+    document.getElementById('table').innerHTML = tableHtmlContent;
+
+    alert('Doves works successfully!');    
 }
