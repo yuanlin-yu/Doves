@@ -3,50 +3,49 @@
     <head>
         <title>test</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h2>一、项目概况</h2>
-        <div>
-            <p>1、占地面积: </p>
-            <input type="text" id="text-1"/>
+        <div id="container">
+            <h1>xx项目周报</h1>
+            <div>
+                <h2>一、项目概况</h2>
+                <textarea id="intro" style="width: 540px; height: 200px;"></textarea>
+                <h2>二、项目进展</h2>
+                <div class="inline">
+                    <p>1、方案设计: </p>
+                    <input type="text" id="i-1"/>
+                </div>
+                <div class="inline">
+                    <p>2、开发报建: </p>
+                    <input type="text" id="i-2"/>
+                </div>
+                <div class="inline">
+                    <p>3、工程管理: </p>
+                    <input type="text" id="i-3"/>
+                </div>
+                <h2>三、重点事项</h2>
+                <table style="border: black solid 1px;margin: 10px 0; padding: 10px;" id="table"> 
+                    <tr>
+                    <th>编号</th>
+                    <th>事项</th>
+                    <th>计划完成时间</th>
+                    <th>进展</th>
+                    </tr>
+                    <tr>
+                    <td>1</td>
+                    <td><input type="text" id="t-11"></td>
+                    <td><input type="date" id="t-12"></td>
+                    <td><input type="text" id="t-13"></td>
+                    </tr>
+                    <tr>
+                    <td>2</td>
+                    <td><input type="text" id="t-21"></td>
+                    <td><input type="date" id="t-22" value="2024-01-21"></td>
+                    <td><input type="text" id="t-23"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div>
-            <p>2、开工时间: </p>
-            <input type="text" id="text-2"/>
-        </div>
-        <h2>二、项目进展</h2>
-        <div>
-            <p>1、方案设计: </p>
-            <input type="text" id="text-3"/>
-        </div>
-        <div>
-            <p>2、开发报建: </p>
-            <input type="text" id="text-4"/>
-        </div>
-        <div>
-            <p>3、其他: </p>
-            <input type="text" id="text-5"/>
-        </div>
-        <h2>三、重点事项</h2>
-        <table style="border: black solid 1px;margin: 10px 0; padding: 10px;" id="table"> 
-            <tr>
-              <th>编号</th>
-              <th>事项</th>
-              <th>计划完成时间</th>
-              <th>进展</th>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td><input type="text" id="t-11"></td>
-              <td><input type="date" id="t-12"></td>
-              <td><input type="text" id="t-13"></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td><input type="text" id="t-21"></td>
-              <td><input type="date" id="t-22" value="2024-01-21"></td>
-              <td><input type="text" id="t-23"></td>
-            </tr>
-          </table>
     </body>
 </html>

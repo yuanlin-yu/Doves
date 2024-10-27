@@ -29,25 +29,38 @@ const fill = (html) => {
     //get the target data from docx file
     const $ = load(html);
 
-    //paragraphsText fill
+    //textArea fill
+    const allText = [];
+    var areaText = '';
+    $('h3, li, p').each((index, element) => {
+        allText.push($(element).text().trim());
+    });
+    
+    const areaTextArray = allText.slice(1, allText.indexOf('项目进展'));
+    areaTextArray.forEach((item, index) => {
+        areaText += (index+1) + '、' + item + '\n';
+    });
+    document.getElementById('intro').value = areaText;
+
+    //input fill
     const paragraphsText = [];
     $('li').each((index, element) => {
         paragraphsText.push($(element).text().trim());
     });
 
+    const updateParagraphsText = paragraphsText.filter(item => !areaTextArray.includes(item));
+
     const inputId = [  //create the target html input elements array. note that the order should be consistent with paragraphsText.
-        "text-1",
-        "text-2",
-        "text-3",
-        "text-4",
-        "text-5"
+        "i-1",
+        "i-2",
+        "i-3"
     ];
 
-    if(inputId.length === paragraphsText.length) {
+    if(inputId.length === updateParagraphsText.length) {
         for(var i = 0; i < inputId.length; i++) {
-            console.log(inputId[i], paragraphsText[i])
+            console.log(inputId[i], updateParagraphsText[i])
             let input = document.getElementById(inputId[i]);
-            input.value = paragraphsText[i].split("：")[1];
+            input.value = updateParagraphsText[i].split("：")[1];
         }
     } else {
         alert('input length error!')

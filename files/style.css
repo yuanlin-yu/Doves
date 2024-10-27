@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color:white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    background-color:rgb(240,240,240);
+    padding: 25px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 0 0 gray;
+    border: black solid 1px;
+}
+
+.inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px;
+}
+
+.inline input {
+    height: 22px;
+    margin: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+textarea {
+    resize: vertical;
+}
