@@ -1,0 +1,31 @@
+{
+	"manifest_version": 2,
+	"name": "doves",
+	"version": "1.0.0",
+	"description": "一个把本地docx文件信息自动填写到html表格的插件",
+	"author": "aaron-yu",
+	"icons":
+	{
+		"48": "icon.png",
+		"128": "icon.png"
+	},
+	"browser_action": 
+	{
+		"default_icon": "icon.png",
+		"default_popup": "popup.html"
+	},
+	"permissions": ["activeTab", "scripting"],
+	"content_scripts": 
+	[
+		{
+			"matches": ["<all_urls>"],
+			"js": ["dist/bundle.js"]
+		}
+	],
+	"web_accessible_resources": 
+	[
+		"inject.js",
+		"node_modules/mammoth/mammoth.browser.js",
+		"node_modules/cheerio/dist/commonjs/cheerio.js"
+	]
+}
