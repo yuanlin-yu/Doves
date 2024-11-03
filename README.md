@@ -12,18 +12,24 @@ Doves 是一个谷歌浏览器扩展程序，它允许用户从本地文件中�
 
 ## :rocket: Get started
 
-1. **Clone or download this repository**:
+**1. Clone or download this repository**:
 ```bash
 git clone 'https://github.com/yuanlin-yu/doves-docx.git'
 ```
 or download from this page.
 
-2. **Check with an example**:
+**2. Check with an example**:
+
 Select the root folder to load this extension in Chrome, and open the example files to check the initial extension. The example html and docx files are in the examples folder.
 
-![](https://github.com/yuanlin-yu/doves-docx/blob/main/imgs/ui.png)
+the extension ui:
+![ui](https://github.com/yuanlin-yu/doves-docx/blob/main/imgs/ui.png)
 
-3. **Writting your own code in fill() function**:
+example files stored in the `examples` folder:
+![example](https://github.com/yuanlin-yu/doves-docx/blob/main/imgs/example_files.png)
+
+**3. Writting your own code in fill() function**:
+
 Customize your code based on requirements through modifying the `fill()` function in file named `content-script.js`. Here is the example code in this repository:
 
 ```javascript
@@ -108,7 +114,8 @@ const fill = (html) => {
 }
 ```
 
-4. **Use webpack to bundle you files**:
+**4. Use webpack to bundle you files**:
+
 This extension includes external javascript libraries, which may cause difficult to run in Chrome. One way to solve this problem is use `webpack` to bundle and update you files before load the extension in Chrome. The bundle files is stored in `dist` folder default in this repository.
 
 `webpack` is already installed in this repository, so use the command below to bundle you files after you finish your coding.
@@ -117,7 +124,8 @@ This extension includes external javascript libraries, which may cause difficult
 npx webpack
 ```
 
-5. **Reload the extension**:
+**5. Reload the extension**:
+
 Reload the extension in Chrome, and enjoy your new `doves-docx`!
 
 ## :green_book: License
