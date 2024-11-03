@@ -25,9 +25,14 @@ const fillForm = (data) => {
 }
 
 const fill = (html) => {
-    console.log(html);
+    // console.log(html);
     //get the target data from docx file
     const $ = load(html);
+
+    const issueNum = $('p').eq(0).text().trim();
+    console.log(issueNum)
+
+    document.querySelector('div[id="issueNum"] input').value = issueNum;
 
     //textArea fill
     const allText = [];
@@ -35,10 +40,12 @@ const fill = (html) => {
     $('h3, li, p').each((index, element) => {
         allText.push($(element).text().trim());
     });
+
+    console.log(allText)
     
-    const areaTextArray = allText.slice(1, allText.indexOf('项目进展'));
+    const areaTextArray = allText.slice(allText.indexOf('Project Overview'), allText.indexOf('Genteral Project Pregress'));
     areaTextArray.forEach((item, index) => {
-        areaText += (index+1) + '、' + item + '\n';
+        areaText += item;
     });
     document.getElementById('intro').value = areaText;
 
@@ -60,7 +67,7 @@ const fill = (html) => {
         for(var i = 0; i < inputId.length; i++) {
             console.log(inputId[i], updateParagraphsText[i])
             let input = document.getElementById(inputId[i]);
-            input.value = updateParagraphsText[i].split("：")[1];
+            input.value = updateParagraphsText[i].split(":")[1];
         }
     } else {
         alert('input length error!')
