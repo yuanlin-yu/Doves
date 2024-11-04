@@ -1,4 +1,10 @@
-﻿var base64String = ''
+﻿var base64String = '';
+const fileTypeBtn = document.querySelectorAll('input[type="radio"]');
+const fileTypeSpan = document.getElementById('file-type-input');
+
+fileTypeBtn.forEach(radio => radio.addEventListener('change', () => {
+    fileTypeSpan.innerText = radio.value;
+}))
 
 document.getElementById('fileInput').addEventListener('change', function(event) {
     var files = event.target.files;
@@ -13,12 +19,12 @@ document.getElementById('fileInput').addEventListener('change', function(event) 
     }
   });
 
-  document.getElementById('ok').addEventListener('click', () => {
+document.getElementById('ok').addEventListener('click', () => {
     if(base64String.length > 0) {
         // 发送文件数据到 content script
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {
-                action: "fromPopup",
+                action: fileTypeSpan.innerText === 'docx'? "fromPopup-docx" : "fromPopup-xlsx",
                 data: base64String
             }, function(response) {
                 // 可以在这里处理 content script 的响应
@@ -27,3 +33,5 @@ document.getElementById('fileInput').addEventListener('change', function(event) 
         });
     }
   })
+
+

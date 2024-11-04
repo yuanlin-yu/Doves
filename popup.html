@@ -10,11 +10,14 @@
 		<img src="./icon.png">
 		<div>
 			<h2>Doves</h2>
-			<p><strong>docx</strong> v1.2.0</p>
+			<div class="inline">
+				<input type="radio" name="file-type" value="docx" checked>docx</input>
+				<input type="radio" name="file-type" value="xlsx">xlsx</input>
+			</div>
 		</div>
 	</div>
 	<div>
-		<p>Select local docx file:</p>
+		<p>Select local <span id="file-type-input">docx</span> file:</p>
 		<input type="file" id="fileInput" />
 	</div>
 	<button id="ok">OK</button>

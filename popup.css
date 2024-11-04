@@ -50,7 +50,17 @@ img {
     margin: 15px;
 }
 
-input {
+.inline {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: -5px;
+}
+
+#file-type-input {
+    font-weight: bold;
+}
+
+input[type="file"] {
     width: 200px;
     border: black solid 1px;
     padding: 2px;

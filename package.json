@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "cheerio": "^1.0.0",
-    "mammoth": "^1.8.0"
+    "mammoth": "^1.8.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "webpack": "^5.95.0",
