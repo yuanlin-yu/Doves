@@ -17,7 +17,7 @@ const fillForm_docx = (data) => {
 }
 
 const fill = (html) => {
-    // console.log(html);
+
     //get the target data from docx file
     const $ = load(html);
 

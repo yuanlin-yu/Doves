@@ -1,37 +1,38 @@
-# Doves-docx
+# Doves
 
-![Doves](https://github.com/yuanlin-yu/doves-docx/blob/main/icon.png)
+![Doves](https://github.com/yuanlin-yu/doves/blob/main/app/icon.png)
 
-Doves is a google chrome extension that enable users to extract data from local file to fill the online form automatically. This is the docx version of doves, which work on docx files. Other versions say xlsx file would be updated later (maybe :D). This repository enable users to customize their own work flow based on their requirements.
+Doves is a google chrome extension that enable users to extract data from local file to fill the online form automatically, which currently support docx and xlsx files. This repository enable users to customize their own work flow based on their requirements.
 
-> Two javascript libraries `mammoth` and `cherrio` are used in this extenstion. `mammoth` is used to transfer local docx file to html code, and `cherrio` is used to manipulate the html code.
+> Three javascript libraries `mammoth`, `cherrio` and `xlsx` are used in this extenstion. The `mammoth` is used to transfer local docx file to html code, and `cherrio` is used to manipulate the html code , while `xlsx` is used to extract data from xlsx file.
 
-Doves 是一个谷歌浏览器扩展程序，它允许用户从本地文件中提取数据以自动填写在线表单。这是适用于 docx 文件的 Doves 的 docx 版本。其他版本，比如 xlsx 文件的版本，将稍后更新（也许 :D）。这个仓库允许用户根据自己的需求定制自己的工作流程。
+Doves 是一个谷歌浏览器扩展，它允许用户从本地文件中提取数据以自动填写在线表单，目前支持 docx 和 xlsx 文件。这个仓库允许用户根据自己的需求定制自己的工作流程。
 
-> 这个扩展中使用了两个JavaScript库：mammoth 和 cheerio。mammoth 用于将本地的docx文件转换为HTML代码，而 cheerio 用于操作HTML代码。
+> 这个扩展使用了三个JavaScript库：`mammoth`、`cheerio`和`xlsx`。`mammoth`用于将本地docx文件转换为HTML代码，`cheerio`用于操作HTML代码，而`xlsx`用于从xlsx文件中提取数据。
 
 ## :rocket: Get started
 
 **1. Clone or download this repository**:
 ```bash
-git clone 'https://github.com/yuanlin-yu/doves-docx.git'
+git clone 'https://github.com/yuanlin-yu/doves.git'
 ```
 or download from this page.
 
 **2. Check with an example**:
 
-Select the root folder to load this extension in Chrome, and open the example files to check the initial extension. The example html and docx files are in the examples folder.
+Select the `app` folder to load this extension in Chrome, and open the example files to check the initial extension. The example html and docx/xlsx files are in the examples folder.
 
 the extension ui:
-![ui](https://github.com/yuanlin-yu/doves-docx/blob/main/imgs/ui.png)
+![ui](https://github.com/yuanlin-yu/doves/blob/main/imgs/ui.png)
 
 example files stored in the `examples` folder:
-![example](https://github.com/yuanlin-yu/doves-docx/blob/main/imgs/example_files.png)
+![examples](https://github.com/yuanlin-yu/doves/blob/main/imgs/example_files.png)
 
 **3. Writting your own code in fill() function**:
 
-Customize your code based on requirements through modifying the `fill()` function in file named `content-script.js`. Here is the example code in this repository:
+Customize your code based on requirements through modifying the `fill()` function in file named `docx.js`(for docx file) or `xlsx.js` (for xlsx file) in root directory. Here is the example code in this repository:
 
+* fill() in docx.js:
 ```javascript
 const fill = (html) => {
 
@@ -113,12 +114,63 @@ const fill = (html) => {
     alert('Doves works successfully!');    
 }
 ```
+*fill() in xlsx.js:
+```javascript
+const fill = (json) => {
 
+    //json variable contains the content from local xlsx file in JSON format.
+
+    const length = Object.keys(json).length;
+    const targetContent = {
+        "issueNum": json[2][2],
+        "projectOverview": json[5][1],
+        "schemeDesign": json[8][2],
+        "developApply": json[9][2],
+        "construction": json[10][2]
+    }
+
+    targetContent["table"] = [];
+    for(var i=14; i<length-1; i++) {
+        targetContent["table"].push(json[i]);  
+    }
+
+    console.log(targetContent);
+
+    document.querySelector('div[id="issueNum"] input').value = targetContent.issueNum;
+    document.getElementById('intro').value = targetContent.projectOverview;
+    document.getElementById('i-1').value = targetContent.schemeDesign;
+    document.getElementById('i-2').value = targetContent.developApply;
+    document.getElementById('i-3').value = targetContent.construction;
+
+    var tableHtmlContent = `
+        <tr>
+            <th>Num.</th>
+            <th>issue</th>
+            <th>planned deadline</th>
+            <th>progress</th>
+        </tr>    
+    `
+    for(var i =0; i < targetContent.table.length; i++) {
+        let table = targetContent.table;
+        tableHtmlContent += `
+        <tr>
+            <td>${table[i][1]}</td>
+            <td><input type="text" id="t-${10*(i+1)+1}" value="${table[i][2]}"></td>
+            <td><input type="date" id="t-${10*(i+1)+2}" value="${table[i][3]}"></td>
+            <td><input type="text" id="t-${10*(i+1)+3}" value="${table[i][4]}"></td>
+        </tr>
+        `
+    }
+    document.getElementById('table').innerHTML = tableHtmlContent;
+
+    alert('Doves works successfully!');
+}
+```
 **4. Use webpack to bundle you files**:
 
-This extension includes external javascript libraries, which may cause difficult to run in Chrome. One way to solve this problem is use `webpack` to bundle and update you files before load the extension in Chrome. The bundle files is stored in `dist` folder default in this repository.
+This extension includes external javascript libraries, which may cause difficult to run in Chrome. One way to solve this problem is use `webpack` to bundle and update you files before load the extension in Chrome. The bundle files is stored in `app/dist` folder default in this repository.
 
-`webpack` is already installed in this repository, so use the command below to bundle you files after you finish your coding.
+`webpack` is already installed in this repository, so use the command below in root folder to bundle you files after you finish your coding.
 
 ```bash
 npx webpack
@@ -126,7 +178,7 @@ npx webpack
 
 **5. Reload the extension**:
 
-Reload the extension in Chrome, and enjoy your new `doves-docx`!
+Reload the extension in Chrome, and enjoy your new `doves`!
 
 ## :green_book: License
 

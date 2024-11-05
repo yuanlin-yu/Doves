@@ -6,8 +6,14 @@ export const fillForm_xlsx = (data) => {
     const firstSheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[firstSheetName];
     const json = XLSX.utils.sheet_to_json(worksheet, {header: 1});
-    const length = Object.keys(json).length;
+    fill(json);    
+}
 
+const fill = (json) => {
+
+    //json variable contains the content from local xlsx file in JSON format.
+
+    const length = Object.keys(json).length;
     const targetContent = {
         "issueNum": json[2][2],
         "projectOverview": json[5][1],
