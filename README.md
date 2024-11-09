@@ -1,6 +1,6 @@
 # Doves
 
-![Doves](https://github.com/yuanlin-yu/doves/blob/main/app/icon.png)
+![Doves](./app/icon.png)
 
 Doves is a google chrome extension that enable users to extract data from local file to fill the online form automatically, which currently support docx and xlsx files. This repository enable users to customize their own work flow based on their requirements.
 
@@ -23,10 +23,10 @@ or download from this page.
 Select the `app` folder to load this extension in Chrome, and open the example files to check the initial extension. The example html and docx/xlsx files are in the examples folder.
 
 the extension ui:
-![ui](https://github.com/yuanlin-yu/doves/blob/main/imgs/ui.png)
+![ui](./imgs/ui.png)
 
 example files stored in the `examples` folder:
-![examples](https://github.com/yuanlin-yu/doves/blob/main/imgs/example_files.png)
+![examples](./imgs/example_files.png)
 
 **3. Writting your own code in fill() function**:
 
